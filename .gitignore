@@ -1,3 +1,5 @@
+Vendor/ed25519
+
 build/
 *.pbxuser
 !default.pbxuser

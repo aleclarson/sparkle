@@ -1,0 +1,8 @@
+{
+  "repos": {
+    "Vendor/ed25519": {
+      "url": "https://github.com/orlp/ed25519",
+      "head": "master"
+    }
+  }
+}
