@@ -17,8 +17,6 @@
 				5A5ADEEE214EE66E00DF0099 /* PBXTargetDependency */,
 				5AE13FAA1E0D7E2F000D2C2C /* PBXTargetDependency */,
 				14950064195FB8A600BC5B5B /* PBXTargetDependency */,
-				14950066195FB8A600BC5B5B /* PBXTargetDependency */,
-				14950068195FB8A600BC5B5B /* PBXTargetDependency */,
 				1495006A195FB8A600BC5B5B /* PBXTargetDependency */,
 				1495006C195FB8A600BC5B5B /* PBXTargetDependency */,
 			);
@@ -364,20 +362,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = Sparkle;
-		};
-		14950065195FB8A600BC5B5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 61B5F90109C4CEE200B25A18;
-			remoteInfo = "Sparkle Test App";
-		};
-		14950067195FB8A600BC5B5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 612279D80DB5470200AB99EA;
-			remoteInfo = "Sparkle Unit Tests";
 		};
 		14950069195FB8A600BC5B5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2501,16 +2485,6 @@
 			isa = PBXTargetDependency;
 			target = 8DC2EF4F0486A6940098B216 /* Sparkle */;
 			targetProxy = 14950063195FB8A600BC5B5B /* PBXContainerItemProxy */;
-		};
-		14950066195FB8A600BC5B5B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 61B5F90109C4CEE200B25A18 /* Sparkle Test App */;
-			targetProxy = 14950065195FB8A600BC5B5B /* PBXContainerItemProxy */;
-		};
-		14950068195FB8A600BC5B5B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 612279D80DB5470200AB99EA /* Sparkle Unit Tests */;
-			targetProxy = 14950067195FB8A600BC5B5B /* PBXContainerItemProxy */;
 		};
 		1495006A195FB8A600BC5B5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
