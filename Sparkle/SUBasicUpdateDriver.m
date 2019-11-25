@@ -117,16 +117,9 @@
 - (SUAppcastItem *)bestItemFromAppcastItems:(NSArray *)appcastItems getDeltaItem:(SUAppcastItem * __autoreleasing *)deltaItem withHostVersion:(NSString *)hostVersion comparator:(id<SUVersionComparison>)comparator
 {
     SUAppcastItem *item = nil;
-    for(SUAppcastItem *candidate in appcastItems) {
-        if ([self hostSupportsItem:candidate]) {
-            if (
-                !item || (
-                    [item.date compare:candidate.date] == NSOrderedAscending &&
-                    [comparator compareVersion:item.versionString toVersion:candidate.versionString] != NSOrderedDescending
-                )
-            ) {
-                item = candidate;
-            }
+    for (SUAppcastItem *candidate in appcastItems) {
+        if ([self hostSupportsItem:candidate] && [self compareItem:item toItem:candidate] == NSOrderedAscending) {
+            item = candidate;
         }
     }
 
@@ -164,9 +157,17 @@
     return minimumVersionOK && maximumVersionOK && osOK;
 }
 
-- (BOOL)isItemNewer:(SUAppcastItem *)ui
+- (NSComparisonResult)compareItem:(SUAppcastItem *)current toItem:(SUAppcastItem *)next
 {
-    return [[self versionComparator] compareVersion:[self.host version] toVersion:[ui versionString]] == NSOrderedAscending;
+    return !current
+        ? NSOrderedAscending
+        : !next
+        ? NSOrderedDescending
+        : [current.versionString isEqualToString:next.versionString]
+        ? NSOrderedSame
+        : [[self versionComparator] compareVersion:current.versionString toVersion:next.versionString] == NSOrderedAscending
+        ? NSOrderedAscending
+        : [current.date compare:next.date];
 }
 
 - (BOOL)itemContainsSkippedVersion:(SUAppcastItem *)ui
@@ -178,7 +179,7 @@
 
 - (BOOL)itemContainsValidUpdate:(SUAppcastItem *)ui
 {
-    return ui && [self hostSupportsItem:ui] && [self isItemNewer:ui] && ![self itemContainsSkippedVersion:ui];
+    return ![self itemContainsSkippedVersion:ui];
 }
 
 - (void)appcastDidFinishLoading:(SUAppcast *)ac
@@ -221,7 +222,7 @@
     self.latestAppcastItemComparisonResult = [[self versionComparator] compareVersion:[self.host version] toVersion:[item versionString]];
 
 
-    if ([self itemContainsValidUpdate:item]) {
+    if (item && [self itemContainsValidUpdate:item]) {
         self.updateItem = item;
         [self performSelectorOnMainThread:@selector(didFindValidUpdate) withObject:nil waitUntilDone:NO];
     } else {
