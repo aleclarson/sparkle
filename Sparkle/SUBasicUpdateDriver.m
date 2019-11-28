@@ -109,12 +109,12 @@
 }
 
 // This method is only used for testing
-+ (SUAppcastItem *)bestItemFromAppcastItems:(NSArray *)appcastItems getDeltaItem:(SUAppcastItem *_Nullable __autoreleasing *_Nullable)deltaItem withHostVersion:(NSString *)hostVersion comparator:(id<SUVersionComparison>)comparator {
++ (SUAppcastItem *)bestItemFromAppcastItems:(NSArray *)appcastItems getDeltaItem:(SUAppcastItem *_Nullable __autoreleasing *_Nullable)deltaItem withHostVersion:(NSString *)hostVersion {
     SUBasicUpdateDriver* basicUpdateDriver = [[SUBasicUpdateDriver alloc] initWithUpdater:(id<SUUpdaterPrivate>)[SUUpdater sharedUpdater]];
-    return [basicUpdateDriver bestItemFromAppcastItems:appcastItems getDeltaItem:deltaItem withHostVersion:hostVersion comparator:comparator];
+    return [basicUpdateDriver bestItemFromAppcastItems:appcastItems getDeltaItem:deltaItem withHostVersion:hostVersion];
 }
 
-- (SUAppcastItem *)bestItemFromAppcastItems:(NSArray *)appcastItems getDeltaItem:(SUAppcastItem * __autoreleasing *)deltaItem withHostVersion:(NSString *)hostVersion comparator:(id<SUVersionComparison>)comparator
+- (SUAppcastItem *)bestItemFromAppcastItems:(NSArray *)appcastItems getDeltaItem:(SUAppcastItem * __autoreleasing *)deltaItem withHostVersion:(NSString *)hostVersion
 {
     SUAppcastItem *item = nil;
     for (SUAppcastItem *candidate in appcastItems) {
@@ -218,7 +218,7 @@
     {
         // Find the best supported update
         SUAppcastItem *deltaUpdateItem = nil;
-        item = [self bestItemFromAppcastItems:ac.items getDeltaItem:&deltaUpdateItem withHostVersion:self.host.version comparator:[self versionComparator]];
+        item = [self bestItemFromAppcastItems:ac.items getDeltaItem:&deltaUpdateItem withHostVersion:self.host.version];
 
         if (item && deltaUpdateItem) {
             self.nonDeltaUpdateItem = item;
