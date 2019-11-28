@@ -229,8 +229,7 @@
     self.latestAppcastItem = item;
     self.latestAppcastItemComparisonResult = [[self versionComparator] compareVersion:[self.host version] toVersion:[item versionString]];
 
-
-    if (item && [self itemContainsValidUpdate:item]) {
+    if (item && ![item.versionString isEqualToString:[self.host version]] && [self itemContainsValidUpdate:item]) {
         self.updateItem = item;
         [self performSelectorOnMainThread:@selector(didFindValidUpdate) withObject:nil waitUntilDone:NO];
     } else {
