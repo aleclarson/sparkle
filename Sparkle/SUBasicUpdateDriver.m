@@ -118,9 +118,14 @@
 {
     SUAppcastItem *item = nil;
     for (SUAppcastItem *candidate in appcastItems) {
+        // Bail out once the host version is reached, since "appcastItems" should be in reverse chronological order.
         if ([candidate.versionString isEqualToString:hostVersion]) {
-            break; // Bail out once the host version is reached, since "appcastItems" should be in reverse chronological order.
+            if (!item) {
+              item = candidate;
+            }
+            break;
         }
+        // Find the best candidate supported by the host.
         if ([self hostSupportsItem:candidate] && [self compareItem:item toItem:candidate] == NSOrderedAscending) {
             item = candidate;
         }
